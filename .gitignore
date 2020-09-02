@@ -1,0 +1,11 @@
+
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/ShockSpider.iml
+.idea/modules.xml
+.idea/misc.xml
+.idea/inspectionProfiles/profiles_settings.xml
+__pycache__/config.cpython-38.pyc
+__pycache__/DatabaseSetup.cpython-38.pyc
+__pycache__/DatabaseUpdate.cpython-38.pyc
+__pycache__/MySQLProxy.cpython-38.pyc
