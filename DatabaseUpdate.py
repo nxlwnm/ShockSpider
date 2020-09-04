@@ -1,6 +1,6 @@
 import akshare as ak
 from config import Config
-import MySQLProxy
+from MySQLProxy import MySQLProxy
 import DatabaseSetup
 import time
 from datetime import datetime
@@ -13,8 +13,7 @@ class DatabaseUpdate:
         Config.ReadConfig()
 
     def ProceeAction(self):
-        with MySQLProxy.MySQLProxy(host=Config.host, user=Config.user, password=Config.password,
-                                   database=Config.database, charset=Config.charset) as (conn, cursor):
+        with MySQLProxy() as (conn, cursor):
             self.ProcessAllFundNameTableUpdate(conn, cursor)
             self.ProcessOpenFundDailyTableUpdate(conn, cursor)
 
@@ -28,8 +27,8 @@ class DatabaseUpdate:
             if row[0] == "Open_Fund_Daily":
                 lastUpdateTime = row[1]
 
-        # 上次更新时间 与 今天23：00比较/上次更新时间 与 当前时间比较
-        if lastUpdateTime.hour < 23 < datetime.now().hour or lastUpdateTime == datetime.min:
+        # 23点前未更新，或超过一天未更新(忽略周末的情况0
+        if lastUpdateTime.hour < 23 < datetime.now().hour or (datetime.now()- lastUpdateTime).day >= 1:
             self.UpdateOpenFundDailyTable(conn, cursor)
             self.UpdateTimeTableForOpenFundDailyTable(conn, cursor)
         else:

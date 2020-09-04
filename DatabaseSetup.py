@@ -1,13 +1,12 @@
 from config import Config
-import MySQLProxy
+from MySQLProxy import MySQLProxy
 
 class DatabaseSetup:
     def __init__(self):
         Config.ReadConfig()
 
     def ProceeAction(self):
-        with MySQLProxy.MySQLProxy(host=Config.host, user=Config.user, password=Config.password,
-                                   charset=Config.charset) as (conn, cursor):
+        with MySQLProxy() as (conn, cursor):
             self.ExecuteSQLFile('DatabaseSetup.sql', cursor)
 
     def ExecuteSQLFile(self, filepath, cursor):

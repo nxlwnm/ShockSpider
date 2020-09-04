@@ -5,6 +5,8 @@
 python3.75+
 akshare
 mysql
+DBUtils
+gevent
 还有一些绘图库什么的暂时用不到，以后再写
 
 DatabaseSetup.sql里有数据库构建代码
