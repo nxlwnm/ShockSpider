@@ -28,7 +28,7 @@ class DatabaseUpdate:
                 lastUpdateTime = row[1]
 
         # 23点前未更新，或超过一天未更新(忽略周末的情况0
-        if lastUpdateTime.hour < 23 < datetime.now().hour or (datetime.now()- lastUpdateTime).day >= 1:
+        if lastUpdateTime.hour < 23 < datetime.now().hour or (datetime.now()- lastUpdateTime).days >= 1:
             self.UpdateOpenFundDailyTable(conn, cursor)
             self.UpdateTimeTableForOpenFundDailyTable(conn, cursor)
         else:

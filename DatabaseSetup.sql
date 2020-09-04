@@ -32,3 +32,15 @@ CREATE TABLE IF NOT EXISTS Open_Fund_Daily (
     Charge VARCHAR(10) NOT NULL,
     PRIMARY KEY (ID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS Open_Fund_Info;
+CREATE TABLE IF NOT EXISTS Open_Fund_Info (
+    SN INT auto_increment,
+    ID INT,
+    Indicator VARCHAR(20),
+    Date DATETIME,
+    EquityReturn FLOAT,
+    UnitMoney FLOAT,
+    PRIMARY KEY (SN)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE UNIQUE INDEX Open_Fund_Info_Index ON Open_Fund_Info(ID, Indicator, Date);
